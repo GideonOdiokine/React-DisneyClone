@@ -7,6 +7,7 @@ import {
   selectUserName,
   selectUserPhoto,
   setUserLoginDetails,
+  setSignOutState,
 } from "../features/user/userSlice";
 
 const Header = (props) => {
@@ -14,7 +15,7 @@ const Header = (props) => {
   const history = useHistory();
   const userName = useSelector(selectUserName);
   const userPhoto = useSelector(selectUserPhoto);
-  const photo = useSelector(selectUserPhoto);
+  // const photo = useSelector(selectUserPhoto);
   // const email = useSelector(selectUserEmail);
 
   useEffect(() => {
@@ -24,14 +25,25 @@ const Header = (props) => {
         history.push("/home");
       }
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userName]);
   const handleAuth = () => {
-    auth
-      .signInWithPopup(provider)
-      .then((result) => {
-        setUser(result.user);
-      })
-      .catch((error) => alert(error.message));
+    if (!userName) {
+      auth
+        .signInWithPopup(provider)
+        .then((result) => {
+          setUser(result.user);
+        })
+        .catch((error) => alert(error.message));
+    } else if (userName) {
+      auth
+        .signOut()
+        .then(() => {
+          dispatch(setSignOutState());
+          history.push("/");
+        })
+        .catch((err) => console.log(err));
+    }
   };
   const setUser = (user) => {
     dispatch(
@@ -78,7 +90,12 @@ const Header = (props) => {
               <span>SERIES</span>
             </a>
           </NavMenu>
-          <UserImg src={userPhoto} alt={userName} />
+          <SignOut>
+            <UserImg src={userPhoto} alt={userName} />
+            <DropDown>
+              <span onClick={handleAuth}>Sign Out</span>
+            </DropDown>
+          </SignOut>
         </>
       )}
     </Nav>
@@ -195,7 +212,42 @@ const Login = styled.a`
   }
 `;
 const UserImg = styled.img`
+  position: relative;
+  top: 3px;
   height: 100%;
-  border-radius: 50%;
+`;
+const DropDown = styled.div`
+  position: "absolute";
+  top: 48px;
+  right: "0px";
+  background: rgb(19, 19, 19);
+  border: 1px solid rgba(151, 151, 151, 0.3);
+  border-radius: 5px;
+  box-shadow: rgb(0 0 0 / 50%) 0px 0px 18px 0px;
+  padding: 10px;
+  width: 120px;
+  letter-spacing: 3px;
+  opacity: 0;
+`;
+const SignOut = styled.div`
+  position: relative;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  ${UserImg} {
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+  }
+  &:hover {
+    ${DropDown} {
+      opacity: 1;
+    }
+  }
 `;
 export default Header;
