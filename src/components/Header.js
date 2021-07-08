@@ -6,6 +6,7 @@ import { auth, provider } from "../firebase";
 import {
   selectUserName,
   selectUserPhoto,
+  // selectUserEmail,
   setUserLoginDetails,
   setSignOutState,
 } from "../features/user/userSlice";
