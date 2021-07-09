@@ -85,6 +85,10 @@ const Wrap = styled.div`
       width: 100%;
       height: 100%;
     }
+    &:hover {
+      padding: 0;
+      border: 4px solid rgba(249, 249, 249, 0.8);
+    }
   }
 `;
 export default ImgSlider;
