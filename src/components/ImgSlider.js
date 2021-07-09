@@ -16,24 +16,24 @@ const ImgSlider = () => {
   return (
     <Carousel {...settings}>
       <Wrap>
-        <a>
-          <img src="images/slider-badging.jpg"></img>
-        </a>
+        <span>
+          <img src="images/slider-badging.jpg" alt="slider" />
+        </span>
       </Wrap>
       <Wrap>
-        <a>
-          <img src="images/slider-scale.jpg"></img>
-        </a>
+        <span>
+          <img src="images/slider-scale.jpg" alt="slider" />
+        </span>
       </Wrap>
       <Wrap>
-        <a>
-          <img src="images/slider-badag.jpg"></img>
-        </a>
+        <span>
+          <img src="images/slider-badag.jpg" alt="slider" />
+        </span>
       </Wrap>
       <Wrap>
-        <a>
-          <img src="images/slider-scales.jpg"></img>
-        </a>
+        <span>
+          <img src="images/slider-scales.jpg" alt="slider" />
+        </span>
       </Wrap>
     </Carousel>
   );
@@ -74,7 +74,7 @@ const Wrap = styled.div`
   border-radius: 4px;
   cursor: pointer;
   position: relative;
-  a {
+  span {
     position: relative;
     padding: 4px;
     display: block;
@@ -88,6 +88,7 @@ const Wrap = styled.div`
     &:hover {
       padding: 0;
       border: 4px solid rgba(249, 249, 249, 0.8);
+      transition: 0.4s ease-in;
     }
   }
 `;
