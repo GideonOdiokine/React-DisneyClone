@@ -58,7 +58,7 @@ const Header = (props) => {
   return (
     <Nav>
       <Logo>
-        <img src="./images/logo.svg" alt="" />
+        <img src="./images/logo.svg" alt="logo" />
       </Logo>
 
       {!userName ? (
