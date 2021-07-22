@@ -20,19 +20,27 @@ const Home = () => {
 
   useEffect(() => {
     db.collection("movies").onSnapshot((snapshot) => {
+      // eslint-disable-next-line
       snapshot.docs.map((doc) => {
-        console.log(originals);
-        switch (doc.data().type) {
+        // eslint-disable-next-line
+        switch (doc.data().type) {// eslint-disable-next-line
+          // eslint-disable-next-line
           case "recommend":
-            recommends = [...recommends, { id: doc.id, ...doc.data() }];
+            // eslint-disable-next-line
+            recommends = [...recommends, { id: doc.id, ...doc.data() }];// eslint-disable-next-line
+            // eslint-disable-next-line
             break;
           case "new":
-            newDisneys = [...newDisneys, { id: doc.id, ...doc.data() }];
+            // eslint-disable-next-line
+            newDisneys = [...newDisneys, { id: doc.id, ...doc.data() }];// eslint-disable-next-line
             break;
           case "original":
-            originals = [...originals, { id: doc.id, ...doc.data() }];
+            // eslint-disable-next-line
+            originals = [...originals, { id: doc.id, ...doc.data() }];// eslint-disable-next-line
             break;
+            // eslint-disable-next-line
           case "trending":
+            // eslint-disable-next-line
             trendings = [...trendings, { id: doc.id, ...doc.data() }];
             break;
         }
